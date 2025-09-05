@@ -106,7 +106,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const BASE_URL = "https://zerodha-backend-1-b4cg.onrender.com";
+const BASE_URL = "https://zerodha-backend-2.onrender.com";
 
 const Login = () => {
   const [inputValue, setInputValue] = useState({ email: "", password: "" });
