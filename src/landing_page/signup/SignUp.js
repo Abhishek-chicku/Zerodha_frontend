@@ -1,102 +1,108 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./SignUp.css";
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
+    username: "",
     email: "",
     password: "",
-    username: "",
   });
-  const { email, password, username } = inputValue;
+
+  const { username, email, password } = inputValue;
+
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
+    setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
+  const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
   const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
+    toast.success(msg, { position: "bottom-left" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/signup",
-        {
-          ...inputValue,
-        },
+        "http://localhost:4000/api/auth/signup",
+        inputValue,
         { withCredentials: true }
       );
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+
+      if (data.success) {
+        handleSuccess(data.message);
+        setTimeout(() => (window.location.href = "/login"), 1000);
       } else {
-        handleError(message);
+        handleError(data.message);
       }
     } catch (error) {
-      console.log(error);
+      handleError("Server error, try again!");
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-      username: "",
-    });
   };
 
   return (
-    <div className="form_container">
-      <h2>Signup Account</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
-            onChange={handleOnChange}
-          />
+    <div className="signup-container">
+      <div className="overlay">
+        <div className="card">
+          <h2>Signup</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label text-white">Username</label>
+              <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleOnChange}
+                placeholder="Enter your username"
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label text-white">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleOnChange}
+                placeholder="Enter your email"
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label text-white">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleOnChange}
+                placeholder="Enter your password"
+                className="form-control"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              style={{
+                background: "linear-gradient(to right, #00c6ff, #0072ff)",
+                border: "none",
+              }}
+            >
+              Signup
+            </button>
+          </form>
+          <p className="text-center mt-3 text-white">
+            Already have an account?{" "}
+            <Link to="/login" className="text-warning">
+              Login
+            </Link>
+          </p>
         </div>
-        <div>
-          <label htmlFor="email">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            placeholder="Enter your username"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={handleOnChange}
-          />
-        </div>
-        <button type="submit">Submit</button>
-        <span>
-          Already have an account? <Link to={"/login"}>Login</Link>
-        </span>
-      </form>
+      </div>
       <ToastContainer />
     </div>
   );
