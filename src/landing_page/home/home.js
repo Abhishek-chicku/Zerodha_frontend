@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import Server from "../Envoirment";
 import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
       }
       try {
         const { data } = await axios.post(
-          "http://localhost:4000/verify",
+          `${Server}/verify`,
           {},
           { withCredentials: true }
         );
