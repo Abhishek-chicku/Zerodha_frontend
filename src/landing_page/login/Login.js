@@ -20,11 +20,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        `${Server}/api/auth/login`,
-        inputValue,
-        { withCredentials: true }
-      );
+      const { data } = await axios.post(`${Server}api/auth/login`, inputValue, {
+        withCredentials: true,
+      });
 
       if (data.success) {
         handleSuccess(data.message);

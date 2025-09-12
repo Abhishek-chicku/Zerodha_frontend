@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+ import React, { useState } from "react";
+>>>>>>> 1cc8e7bd2a6be52de8d2b84666b9b903b5c8c6f4
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -27,7 +31,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${Server}/api/auth/signup`,
+        `${Server}api/auth/signup`,
         inputValue,
         { withCredentials: true }
       );
@@ -110,3 +114,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
