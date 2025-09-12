@@ -1,7 +1,9 @@
-let IS_PROD = true;
+
+const IS_PROD = true;
 
 const Server = IS_PROD
-  ? "https://zerodha-backend-4.onrender.com/"
-  : "http://localhost:4000";
+  ? "https://zerodha-backend-4.onrender.com/api/auth/"
+  : "http://localhost:4000/api/auth/"; 
 
 export default Server;
+
