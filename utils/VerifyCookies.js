@@ -3,7 +3,7 @@ import Server from "../src/landing_page/Envoirment";
 export const verifyCookie = async () => {
   try {
     const { data } = await axios.post(
-      `${Server}/verify`,
+      `${Server}verify`,
       {},
       { withCredentials: true }
     );
