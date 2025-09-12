@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Server from "../src/landing_page/Envoirment";
 export const verifyCookie = async () => {
   try {
     const { data } = await axios.post(
