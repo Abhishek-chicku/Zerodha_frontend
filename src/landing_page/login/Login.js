@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${Server}`, inputValue, {
+      const { data } = await axios.post(`${Server}/login`, inputValue, {
         withCredentials: true,
       });
 
