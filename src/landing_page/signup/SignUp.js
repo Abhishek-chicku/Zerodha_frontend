@@ -27,7 +27,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${Server}api/auth/signup`,
+        `${Server}`,
         inputValue,
         { withCredentials: true }
       );
