@@ -27,14 +27,14 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${Server}`,
+        `${Server}/signup`,
         inputValue,
         { withCredentials: true }
       );
 
       if (data.success) {
         handleSuccess(data.message);
-        setTimeout(() => (window.location.href = "/login"), 1000);
+        setTimeout(() => (window.location.href = "/login"), 500);
       } else {
         handleError(data.message);
       }
