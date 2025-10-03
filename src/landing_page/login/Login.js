@@ -27,7 +27,7 @@ const Login = () => {
       if (data.success) {
         handleSuccess(data.message);
         setTimeout(
-          () => (window.location.href = "http://localhost:3001"),
+          () => (window.location.href = "https://dashboard-zerodha-cjig.onrender.com/"),
           1000
         );
       } else {
